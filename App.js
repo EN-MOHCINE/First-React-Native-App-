@@ -173,7 +173,35 @@ const App = () => {
       <Text style={styles.dateStyle}>{` Last update: ${dateUpdate}`}</Text>
 
 
-  
+      {/* WebView :afficher site web in  mobile comme iframe html  */}
+        {/* <WebView
+          style={styles.container}
+          source={{ uri: 'https://dequeuniversity.com/library/responsive/1-non-responsive' }}
+        /> */}
+
+
+      {/* Modal */}
+      <View>
+      <Modal isVisible={isModalevisible}
+        onRequestClose = {()=>setisModalevisible(false)}
+        animationType ="animationIn">
+        <View style={{ flex: 1 ,backgroundColor:"lightblue" ,padding :60 }}>
+          <Text>I am the modal content!</Text>
+          <Button title='close' onPress={()=>setisModalevisible(false)}/>
+        </View>
+      </Modal>
+
+
+    {/* status bar  */}
+      <View>
+        <StatusBar barStyle="dark-content"   backgroundColor="lightgreen"/>
+                          {/* Hidden */}
+      </View>
+
+
+   
+
+    </View>
 
     </SafeAreaView>
   );
