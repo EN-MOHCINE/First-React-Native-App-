@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import  App1  from './App1';
+import  App1  from './components/App1';
 import { WebView } from 'react-native-webview';
 import Modal from "react-native-modal";
 import 
@@ -8,13 +8,23 @@ import
       // Button  ,
     View, ImageBackground,
     Button,
-    ActivityIndicator, 
+    ActivityIndicator,
+    Alert,
+    Dimensions,
+    Platform, 
     // ScrollView, 
     // Pressable
-    } 
-    from 'react-native';
+    } from 'react-native';
 // const testprofile = require('./assets/testprofil.jpg');
 import test  from './assets/testprofil.jpg';
+import Appdynamic from './DynamicUI/Appdynamic';
+
+
+
+
+
+
+
 
 const App = () => {
   const [count, setCount] = useState(0);
@@ -59,13 +69,25 @@ const App = () => {
           <Text>06</Text>
         </ImageBackground>
       </View>
-      <View >
-          <App1 />
-      </View>
+
+
+      {/* User Another components  */}
+      <View style ={[styles.app1 ,styles.text ]}>
+          <App1 name="Mohcine" />
+          <App1 name="Aymane" />
+        </View>
+    
+    
+          {/* Dynamic ui   */}
+        {/* <View >
+            <Appdynamic  />
+          </View> */}
+
+
       <View style={styles.container}>
         
         {/* Text Style: */}
-        <Text style={styles.text}>
+        <Text style={styles.text1}>
         Hello,{"\n"}
         Welcome to the application increment counter{"\n"}
         Count: {count}
@@ -85,13 +107,15 @@ const App = () => {
         
 
         {/* Activity Indicator : "loading " */}
-        <View style={[styles.container, styles.horizontal]}>
+        {/* <View style={[styles.container, styles.horizontal]}>
           <ActivityIndicator />
           <ActivityIndicator size="large" />
           <ActivityIndicator size="small" color="#0000ff" />
           <ActivityIndicator size="large" color="#00ff00" />
-        </View>
+        </View> */}
 
+
+        
 
 
         {/* scroll view  */} 
@@ -157,7 +181,7 @@ const App = () => {
                 Lorem emptio, mauris non bibendum 
                 </Text>  
             </ScrollView>
-          </Pressable> */}
+          </Pressable>  */}
 
         </View>
 
@@ -170,7 +194,7 @@ const App = () => {
       </View>
 
       {/*Afficher text   */}
-      <Text style={styles.dateStyle}>{` Last update: ${dateUpdate}`}</Text>
+      <Text style={[styles.dateStyle ,styles.text]}>{` Last update: ${dateUpdate}`}</Text>
 
 
       {/* WebView :afficher site web in  mobile comme iframe html  */}
@@ -190,16 +214,28 @@ const App = () => {
           <Button title='close' onPress={()=>setisModalevisible(false)}/>
         </View>
       </Modal>
+        
+        {/* Alert */}
+        <View style={{backgroundColor:"Blue"}}>
+          <Button title ="Alert" onPress={()=>Alert.alert("Confirme Votre Commande " ,"N° Commande :321312 " ,
+            [
+              {text: 'Cancel', style: 'cancel',
+                onPress: () => console.log('Commande annulée!') ,
+              },
+              {text: 'OK', onPress: () => console.log('Commande confirmée!') },
+            ]
+          )}>
 
+          </Button>
+        </View>
 
     {/* status bar  */}
-      <View>
-        <StatusBar barStyle="dark-content"   backgroundColor="lightgreen"/>
+      {/* <View> */}
+        {/* <StatusBar barStyle="dark-content"   backgroundColor="lightgreen"/> */}
                           {/* Hidden */}
-      </View>
+      {/* </View> */}
 
 
-   
 
     </View>
 
@@ -208,16 +244,52 @@ const App = () => {
 }
 
 
-
+const  windowWidth = Dimensions.get('window').width;
+const  windowheight = Dimensions.get('window').height;
 //style css 
 const styles = StyleSheet.create({
+
+  // fixe problem  status bar  
   safeArea: {
     flex: 1,
+    backgroundColor: 'white',
+    // plaftorm.OS getting the OS specific status bar height
+    paddingTop: Platform.OS === 'ios'? 100 : 50,
   },
+
+  //separtion systeme ios and android 
+  text1: {
+    ...Platform.select ({
+      android :{
+        color: 'blue',
+        fontSize: 20,
+        fontStyle : 'italic',
+      } ,
+      ios :{
+        color: 'red',
+        fontSize: 30,
+        fontStyle :'modern',
+      }
+    } ,)
+    
+    }
+    ,
   horizontal :{
     flexDirection: 'row',
     justifyContent: 'space-around',
     padding: 10,
+  }, 
+  appdynamic :{
+    flex :1 ,
+    width : windowWidth >500 ? "70%" :"90%" ,
+    height : windowheight >500 ? "70%" :"90%",
+    backgroundColor: 'lightblue',
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: 10,
+    padding: 10,
+    margin: 10,
+    borderRadius: 10,
   },
   header: {
     flexDirection: 'row',
@@ -239,13 +311,17 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: 18,
+    fontWeight: 'bold',
+    color: 'black',
+    marginBottom: 10,
     textAlign: 'center',
-    margin: 10,
+    margin: 20,
+    
   },
   button: {
     backgroundColor: 'green',
     padding: 10,
-    margin: 10,
+    margin:10 ,
   },
   button1: {
     backgroundColor: 'red',
@@ -263,7 +339,26 @@ const styles = StyleSheet.create({
   scrolview :{
     padding: 10,
     margin: 10,
-  }
+  } ,
+  app1 :{
+    backgroundColor: "coral",
+    // width: "%",
+    height: 50,
+    paddingHorizontal :"50",
+    paddingVertical :"1",
+    borderRadius: 10,
+    marginHorizontal :30,
+    marginRight :90 ,
+    justifyContent: "center",
+    alignItems: "center" ,
+    // add Box shadow 
+    shadowColor :"black" ,
+    shadowOffset:{ width:2 ,height:2 },
+    shadowOpacity:0.5 ,
+    shadowRadius:4 ,
+    elevation: 2,
+  } ,
+
 });
 
 export default App;
