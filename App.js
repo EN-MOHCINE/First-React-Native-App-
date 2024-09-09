@@ -11,13 +11,16 @@ import
     ActivityIndicator,
     Alert,
     Dimensions,
-    Platform, 
+    Platform,
+    Switch, 
     // ScrollView, 
     // Pressable
     } from 'react-native';
 // const testprofile = require('./assets/testprofil.jpg');
-import test  from './assets/testprofil.jpg';
+import test  from './assets/testprofil.jpg' ;
 import Appdynamic from './DynamicUI/Appdynamic';
+import { FlatList, ScrollView, SectionList, TextInput } from 'react-native-web';
+import data from './data.json';
 
 
 
@@ -30,7 +33,7 @@ const App = () => {
   const [count, setCount] = useState(0);
   const [isModalevisible ,setisModalevisible] = useState(false);
   const [dateUpdate, setDateUpdate] = useState(formatDate(new Date()));
-
+  const [Nametext ,setNametext] =useState('') 
   function formatDate(date) {
     return (
       date.getDate() +
@@ -56,6 +59,11 @@ const App = () => {
     setCount(count - 1);
     setDateUpdate(formatDate(new Date()));
   }
+  function afficheData() {
+    console.log(data);
+  }
+  const [isEnabled, setIsEnabled] = useState(false);
+  const toggleSwitch = () => setIsEnabled(previousState => !previousState);
 
   return (
     <SafeAreaView style={styles.safeArea}>
@@ -77,11 +85,107 @@ const App = () => {
           <App1 name="Aymane" />
         </View>
     
+
+        <ScrollView>
+          {/* Map */}
+        {/* <View>
+          {data.map((item, index) => (
+            <React.Fragment key={index}>
+              <Text>type: {item.type}</Text>
+              <Text>name: {item.name}</Text>
+            </React.Fragment>
+          ))}
+          <Button title="affiche data" onPress={afficheData} />
+        </View> */}
+      </ScrollView>
+
+
+      {/* flat list  */}
+      {/* <ScrollView> */}
+
+      {/* <FlatList
+          data={data}
+          keyExtractor={(item, index) => index.toString()}
+          renderItem={({ item }) => (
+            <>
+              <Text>type: {item.type}</Text>
+              <Text>name: {item.name}</Text>
+              <Text> <ul>power: {item.power.map((item)=>(<li>{item}</li>))}</ul></Text>
+            </>
+          )}
+          //separator  item 
+          ItemSeparatorComponent ={ <View style={{ height: 16, backgroundColor: 'gray' }}  /> }   
+          // empty  component 
+          ListEmptyComponent  ={<Text>No  data found </Text>}
+          // header component 
+          ListHeaderComponent ={<Text style={styles.headerComponent}>Shows all Pokemone </Text>}
+          // footer component 
+          ListFooterComponent ={<Text style={styles.headerComponent}>End of List </Text>}
+          
+          
+          // horizontal
+          /> */}
+
+      {/* <View>
+      <SectionList
+          sections={data}
+          renderItem={({ item }) => {
+            return (
+              <View>
+                <Text>{item.name}</Text>
+              </View>
+            );
+          }}
+          // renderSectionHeader={({ section }) => (
+          //   <Text style={styles.headerComponent}>{section.type}</Text>
+          // )}
+          itemseparatorComponent
+          sectioneparatorComponent
+        />
+      </View> */}
+          {/* </ScrollView> */}
     
           {/* Dynamic ui   */}
         {/* <View >
             <Appdynamic  />
-          </View> */}
+            </View> */}
+
+
+
+
+
+      {/* forms */}
+
+        <TextInput style={styles.inputtext} value={Nametext}
+        placeholder="Enter your name"
+        // disabled
+        // secureTextEntry
+        // KeyboardType="Phone" 
+        autoCapitalize="none"
+        autoCorrect={false}
+        
+        onChangeText={setNametext} />
+        <Text>My name is  : {Nametext}</Text>
+        <TextInput
+        placeholder="Message"
+        multiline
+        style = {{ minHeight: 100, borderColor: 'gray'
+        ,textAlignVerticale :"top", borderWidth: 1 }}
+        />
+
+{/*     <Switch
+        trackColor={{ false: "#767577", true: "#81b0ff" }}
+        thumbColor={isEnabled ? "#f5dd4b" : "#f4f3f4"}
+        ios_backgroundColor="#3e3e3e"
+        onValueChange={toggleSwitch}
+        value={isEnabled}
+      /> */}
+
+
+
+
+
+
 
 
       <View style={styles.container}>
@@ -313,7 +417,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: 'bold',
     color: 'black',
-    marginBottom: 10,
+    // marginBottom: 10,
     textAlign: 'center',
     margin: 20,
     
@@ -358,6 +462,22 @@ const styles = StyleSheet.create({
     shadowRadius:4 ,
     elevation: 2,
   } ,
+  headerComponent :{
+    textAlign :"center" ,
+    justifyContent: "center",
+    backgroundColor :"lightblue",
+    
+  
+    elevation: 2,
+  } ,
+  inputtext :{
+    width: "90%",
+    paddingHorizontal: 10,
+    color: "black", // Changed `textColor` to `color` as per React Native TextInput prop
+    marginBottom: 10,
+    backgroundColor: "#f2f2f2",
+    borderRadius: 5
+  }
 
 });
 

@@ -1,0 +1,14 @@
+[
+    { "id": "1", "type": "Grass", "name": "Bulbasaur", "power": ["fire", "water"] },
+    { "id": "2", "type": "Grass", "name": "Ivysaur", "power": ["earth", "wind"] },
+    { "id": "3", "type": "Grass", "name": "Venusaur", "power": ["fire", "earth"] },
+    { "id": "4", "type": "Fire", "name": "Charmander", "power": ["water", "electric"] },
+    { "id": "5", "type": "Fire", "name": "Charmeleon", "power": ["earth", "wind"] },
+    { "id": "6", "type": "Fire", "name": "Charizard", "power": ["water", "wind"] },
+    { "id": "7", "type": "Water", "name": "Squirtle", "power": ["fire", "earth"] },
+    { "id": "8", "type": "Water", "name": "Wartortle", "power": ["wind", "fire"] },
+    { "id": "9", "type": "Water", "name": "Blastoise", "power": ["earth", "electric"] },
+    { "id": "10", "type": "Bug", "name": "Caterpie", "power": ["wind", "earth"] },
+    { "id": "11", "type": "Bug", "name": "Metapod", "power": ["water", "fire"] },
+    { "id": "12", "type": "Bug", "name": "Butterfree", "power": ["earth", "wind"] }
+]
