@@ -23,7 +23,11 @@ import { FlatList, ScrollView, SectionList, TextInput } from 'react-native-web';
 import data from './data.json';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Details from './components/details';
+
 import { NavigationContainer } from '@react-navigation/native';
+import { createDrawerNavigator } from '@react-navigation/drawer';
+import Tabnavigation from './components/tabnavigation';
+
 
 
 
@@ -71,6 +75,7 @@ const App = () => {
   const toggleSwitch = () => setIsEnabled(previousState => !previousState);
 
   const  Stack   = createNativeStackNavigator() ;
+  const Drawer = createDrawerNavigator();
 
   return (
     <SafeAreaView style={styles.safeArea}>
@@ -102,7 +107,7 @@ const App = () => {
           </Stack.navigator>
       </NavigationContainer> */}
         
-      <NavigationContainer>
+      {/* <NavigationContainer>
         <Stack.Navigator initialRouteName="Home">
           <Stack.Screen 
                 name="Home" component={App1}  
@@ -112,7 +117,28 @@ const App = () => {
             // options={{ title: 'Custom Details saTitle', headerShown:false }}
             component={Details} />
         </Stack.Navigator>
-    </NavigationContainer>
+    </NavigationContainer> */}
+
+
+
+{/* drawer navigation  */}
+
+  <NavigationContainer >
+    <Drawer.Navigator>
+          <Drawer.Screen  
+            name="Home" 
+            component={App1}
+            options={{
+              title: "Page Home",
+              drawerLabel: "Home page", 
+            }}
+          />
+          <Drawer.Screen  name="Details" component={Details}/>
+    </Drawer.Navigator>
+  </NavigationContainer>
+
+
+
 
         {/* <ScrollView> */}
           {/* Map */}
@@ -360,16 +386,20 @@ const App = () => {
 
           </Button>
         </View>
+        
 
     {/* status bar  */}
       {/* <View> */}
         {/* <StatusBar barStyle="dark-content"   backgroundColor="lightgreen"/> */}
                           {/* Hidden */}
       {/* </View> */}
-
-
-
     </View>
+
+
+          <View>
+            <Tabnavigation/>
+          </View>
+  
 
     </SafeAreaView>
   );
