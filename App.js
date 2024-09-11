@@ -21,6 +21,11 @@ import test  from './assets/testprofil.jpg' ;
 import Appdynamic from './DynamicUI/Appdynamic';
 import { FlatList, ScrollView, SectionList, TextInput } from 'react-native-web';
 import data from './data.json';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import Details from './components/details';
+import { NavigationContainer } from '@react-navigation/native';
+
+
 
 
 
@@ -65,6 +70,8 @@ const App = () => {
   const [isEnabled, setIsEnabled] = useState(false);
   const toggleSwitch = () => setIsEnabled(previousState => !previousState);
 
+  const  Stack   = createNativeStackNavigator() ;
+
   return (
     <SafeAreaView style={styles.safeArea}>
 
@@ -80,13 +87,34 @@ const App = () => {
 
 
       {/* User Another components  */}
-      <View style ={[styles.app1 ,styles.text ]}>
+      {/* <View style ={[styles.app1 ,styles.text ]}>
           <App1 name="Mohcine" />
           <App1 name="Aymane" />
-        </View>
-    
+        </View> */}
+      
 
-        <ScrollView>
+
+      {/* navigation  */}
+      {/* <NavigationContainer>
+          <Stack.navigator >
+              <Stack.Screen  name ="Home" component={App1} />
+              <Stack.Screen  name ="details" component={Details} />
+          </Stack.navigator>
+      </NavigationContainer> */}
+        
+      <NavigationContainer>
+        <Stack.Navigator initialRouteName="Home">
+          <Stack.Screen 
+                name="Home" component={App1}  
+                // options={{ title: 'Custom Details saTitle', headerShown:false }}
+          />
+          <Stack.Screen name="Details"
+            // options={{ title: 'Custom Details saTitle', headerShown:false }}
+            component={Details} />
+        </Stack.Navigator>
+    </NavigationContainer>
+
+        {/* <ScrollView> */}
           {/* Map */}
         {/* <View>
           {data.map((item, index) => (
@@ -97,7 +125,7 @@ const App = () => {
           ))}
           <Button title="affiche data" onPress={afficheData} />
         </View> */}
-      </ScrollView>
+      {/* </ScrollView> */}
 
 
       {/* flat list  */}
@@ -156,7 +184,7 @@ const App = () => {
 
       {/* forms */}
 
-        <TextInput style={styles.inputtext} value={Nametext}
+        {/* <TextInput style={styles.inputtext} value={Nametext}
         placeholder="Enter your name"
         // disabled
         // secureTextEntry
@@ -171,7 +199,7 @@ const App = () => {
         multiline
         style = {{ minHeight: 100, borderColor: 'gray'
         ,textAlignVerticale :"top", borderWidth: 1 }}
-        />
+        /> */}
 
 {/*     <Switch
         trackColor={{ false: "#767577", true: "#81b0ff" }}
